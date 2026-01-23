@@ -1,0 +1,82 @@
+{{define "home"}}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Game of Life</title>
+
+  <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(75, 10px);
+      gap: 1px;
+      margin-bottom: 12px;
+    }
+
+    .cell {
+      width: 10px;
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 2px;
+    }
+
+    .cell.alive {
+      background: #111827;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    button {
+      padding: 6px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h3>Game of Life</h3>
+
+<div id="controls-and-board">
+    {{template "board-wrapper" .}}
+</div>
+
+  <div class="controls">
+    <button hx-post="/start" hx-target="#board-wrapper" hx-swap="outerHTML">Start</button>
+    <button hx-post="/stop" hx-target="#board-wrapper" hx-swap="outerHTML">Stop</button>
+  </div>
+</body>
+</html>
+{{end}}
+
+{{define "board-wrapper"}}
+<div id="board-wrapper"
+     {{if .Running}} 
+        hx-get="/board" 
+        hx-trigger="every 100ms" 
+        hx-target="#board" 
+        hx-swap="outerHTML"
+     {{end}}>
+  {{template "board" .}}
+</div>
+{{end}}
+
+{{define "board"}}
+<div id="board" class="grid">
+  {{range .Board}}
+    {{range .}}
+      <div class="cell{{if .}} alive{{end}}"></div>
+    {{end}}
+  {{end}}
+</div>
+{{end}}
