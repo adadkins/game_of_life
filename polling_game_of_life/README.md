@@ -1,0 +1,1 @@
+This directory is for an initial version that used polling from the UI to get new board state. 
