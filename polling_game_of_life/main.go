@@ -116,38 +116,6 @@ func generateNextFrame(b [][]bool) [][]bool {
 					}
 				}
 			}
-			//get the left
-			// if b[i-1][ii] == true {
-			// 	neighbors++
-			// }
-			// //get the right
-			// if b[i+1][ii] == true {
-			// 	neighbors++
-			// }
-			// //get the top
-			// if b[i][ii+1] == true {
-			// 	neighbors++
-			// }
-			// //get the bottom
-			// if b[i][ii-1] == true {
-			// 	neighbors++
-			// }
-			// //get the top right
-			// if b[i+1][ii+1] == true {
-			// 	neighbors++
-			// }
-			// //get the top left
-			// if b[i-1][ii+1] == true {
-			// 	neighbors++
-			// }
-			// //get the bottom right
-			// if b[i+1][ii-1] == true {
-			// 	neighbors++
-			// }
-			// //get teh bottom left
-			// if b[i-1][ii-1] == true {
-			// 	neighbors++
-			// }
 
 			//if an alive cell has 2 or 3 neighbors it lives
 			if b[i][ii] == true && (neighbors == 2 || neighbors == 3) {
