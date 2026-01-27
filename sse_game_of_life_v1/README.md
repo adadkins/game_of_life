@@ -1,0 +1,1 @@
+This directory uses SSE events to trigger a /GET call for the board state
