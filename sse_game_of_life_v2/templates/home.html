@@ -1,0 +1,81 @@
+{{define "home"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Game of Life</title>
+
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx-ext-sse@2.2.4"
+      integrity="sha384-A986SAtodyH8eg8x8irJnYUk7i9inVQqYigD6qZ9evobksGNIXfeFvDwLSHcp31N"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          Roboto, sans-serif;
+        padding: 16px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(75, 10px);
+        gap: 1px;
+        margin-bottom: 12px;
+      }
+
+      .cell {
+        width: 10px;
+        height: 10px;
+        background: #e5e7eb;
+        border-radius: 2px;
+      }
+
+      .cell.alive {
+        background: #111827;
+      }
+
+      .controls {
+        display: flex;
+        gap: 8px;
+      }
+
+      button {
+        padding: 6px 12px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Game of Life</h3>
+
+    <div id="controls-and-board">
+      {{template "board-wrapper" .}}
+    </div>
+
+    <div class="controls">
+      <button hx-post="/start">Start</button>
+      <button hx-post="/stop">Stop</button>
+    </div>
+  </body>
+</html>
+{{ end }}
+
+{{define "board-wrapper"}}
+<div id="board-wrapper" sse-connect="/sse" hx-ext="sse" hx-target="#board" hx-swap="outerHTML" sse-swap="message">
+    {{template "board" .Board}}
+</div>
+{{ end }}
+
+{{define "board"}}
+<div id="board" class="grid">
+  {{range .}}
+  {{range .}}
+  <div class="cell{{if .}} alive{{ end }}"></div>
+  {{ end }}
+  {{ end }}
+</div>
+{{ end }}
