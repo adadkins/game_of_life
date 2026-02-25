@@ -1,7 +1,8 @@
 Go & HTMX: Game of Life
 
 A demo repository exploring the evolution of real-time state synchronization in Go.
-🚀 Roadmap & Versions
+
+🚀 Roadmap & Versions:
 
     v1: UI Polling – Standard hx-get polling for updates.
 
@@ -11,7 +12,7 @@ A demo repository exploring the evolution of real-time state synchronization in 
 
     v4: WebSockets – Full bi-directional communication for the game engine.
 
-🛠 Tech
+🛠 Tech:
 
     Backend: Go (Golang)
 
